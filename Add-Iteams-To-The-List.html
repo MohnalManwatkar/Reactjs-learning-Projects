@@ -1,0 +1,41 @@
+<script src="react_development.js"></script>
+<script src="babel.js"></script>
+<script src="react-dom.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const App = () => {
+        const [data, setData]=React.useState([])
+        const [name, setName]=React.useState("")
+        const fnChange = (eve)=> {
+            setName(eve.target.value)
+        }
+        const fnClick = ()=> {
+            if (!data.includes(name)){
+                setData([...data, name])
+            } else {
+                alert('already exist')
+            }
+        }
+        return <div>
+
+            <p>
+                <b> Name: <input onChange={fnChange} type="text" /> </b>
+            </p>
+            <p>
+                <b> <button onClick={fnClick}>clicked</button> </b>
+            </p>
+
+            <ol>
+                {
+                    data.map((ele, indx)=> {
+                        return <li key={'li_'+indx}>{ele}</li>
+                    })
+                }
+                </ol>
+
+        </div>
+    }
+    ReactDOM.createRoot(document.querySelector("#root")).render(<App />)
+</script>
