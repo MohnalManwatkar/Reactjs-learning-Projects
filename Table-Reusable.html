@@ -1,0 +1,54 @@
+<script src="react_development.js"></script>
+<script src="babel.js"></script>
+<script src="react-dom.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const Table = (props) => {
+        const {th_head, data, columns} = props
+        return <div>
+            <table border="1px">
+                <thead>
+                    <tr>
+                        {
+                            th_head.map((element, index)=> {
+                                return <th key={"th_" + index}>{element}</th>
+                            })
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    {/* 1. create row */}
+                    {/* 1. row contains columns and columns contains data */}
+                    {
+                        data.map((obj, index)=> {
+                            return <tr key={'tr_' + index}>{
+                                columns.map((key, index)=> {
+                                    return <td key={'td_' + index}>{obj[key]}</td>
+                                })
+                            }</tr>
+                        })
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    const App = () => {
+        const fruits = [
+            { "name": "apple", "color": "red", "taste": "sweet" },
+            { "name": "banana", "color": "yellow", "taste": "sweet" },
+            { "name": "cherry", "color": "red", "taste": "sweet-tart" },
+            { "name": "date", "color": "brown", "taste": "sweet" },
+            { "name": "elderberry", "color": "black", "taste": "tart" },
+            { "name": "fig", "color": "purple", "taste": "sweet" },
+            { "name": "grape", "color": "green", "taste": "sweet" },
+            { "name": "honeydew", "color": "green", "taste": "sweet" }
+        ]
+
+        return <div>
+            <Table th_head={['name', 'color', 'taste']} data={fruits} columns={['name', 'color', 'taste']} />
+        </div>
+    }
+    ReactDOM.createRoot(document.querySelector("#root")).render(<App />)
+</script>
