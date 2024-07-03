@@ -1,0 +1,83 @@
+<script src="react_development.js"></script>
+<script src="babel.js"></script>
+<script src="react-dom.js"></script>
+<style>
+    .box {
+        border: 1px solid red;
+        height: 100px;
+        width: 100px;
+        display: inline-block;
+    }
+    .bg {
+        background-color: blue;
+    }
+</style>
+
+
+<div id="root"></div>
+<script type="text/babel">
+
+    
+    const Box = ({id,isNext})=> {
+        const [boxId, setBoxId] = React.useState(0)
+        const fnBoxClick = (eve)=> {
+            setBoxId(eve.target.id)
+        }
+
+        return <React.Fragment>
+            {isNext && <div></div>}
+            <div onClick={fnBoxClick} className={`box ${id = boxId && 'bg'}`} id={id}></div>
+        </React.Fragment>
+    }
+
+    function App() {
+
+        const data = [
+        {
+            id:'box1'
+        },
+        {
+            id:'box2'
+        },
+        {
+            id:'box3'
+        },
+        {
+            id:'box4',
+            isNext:true
+        },
+        {
+            id:'box5'
+        },
+        {
+            id:'box6'
+        },
+        {
+            id:'box7',
+            isNext:true
+        },
+        {
+            id:'box8'
+        },
+        {
+            id:'box9'
+        },
+        {
+            id:'box0',
+            isNext:true
+        }
+    ]
+
+        return <div>
+            {
+                data.map((obj, indx)=> {
+                    return <Box key={'k_'+1} {...obj} /> 
+                })
+            }
+        </div>
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector("#root"));
+
+    root.render(<App />)
+</script>
